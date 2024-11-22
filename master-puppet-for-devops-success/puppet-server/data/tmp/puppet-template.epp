@@ -1,0 +1,5 @@
+<% | String $role, String $server_name | %>
+
+Welcome to <%= $server_name %>
+
+This machine is a <%= $role %> server

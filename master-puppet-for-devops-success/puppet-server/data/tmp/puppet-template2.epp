@@ -1,0 +1,8 @@
+<% | Array $name_servers, Optional[String] $search | %> # $search either be a string or undefined
+
+<% $name_servers.each |$ns| { %>
+nameserver <%= $ns %>
+<% } %>
+<% if $search { %>
+search <%= $search %>
+<% } %>
