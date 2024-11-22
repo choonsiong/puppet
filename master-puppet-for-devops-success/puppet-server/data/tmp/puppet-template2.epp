@@ -6,3 +6,12 @@ nameserver <%= $ns %>
 <% if $search { %>
 search <%= $search %>
 <% } %>
+
+# To render above template
+$name_servers = ['192.168.1.1', '192.168.1.2', '192.168.1.3']
+$search = 'admin.example.com example.com'
+
+$output = epp('system/resolve.epp', {
+  'name_servers' => $name_servers,
+  'search' => $search
+})
