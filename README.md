@@ -48,3 +48,30 @@ What's next:
     Try Docker Debug for seamless, persistent debugging tools in any container or image → docker debug puppet-server-demo
     Learn more at https://docs.docker.com/go/debug-cli/
 ```
+
+Start the puppet agent container:
+
+```
+$ 
+$ mkdir /tmp/puppet-agent-code 
+$
+$ docker run -d --name puppet-agent-demo --network-alias puppet-agent-demo  --hostname puppet-agent-demo --network puppet-demo-net -v "/tmp/puppet-agent-code:/etc/puppetlabs/code" ghcr.io/voxpupuli/puppetserver:8.6.1-latest 
+52dccb8c8dc0f56dc411cc9d963b5f64e7394af8fa3da814a5886db69fd29704
+$
+$
+$ docker exec -it puppet-agent-demo bash
+root@puppet-agent-demo:/# 
+root@puppet-agent-demo:/# 
+root@puppet-agent-demo:/# 
+root@puppet-agent-demo:/# ping puppet-server-demo
+PING puppet-server-demo (172.23.0.2) 56(84) bytes of data.
+64 bytes from puppet-server-demo.puppet-demo-net (172.23.0.2): icmp_seq=1 ttl=64 time=0.107 ms
+64 bytes from puppet-server-demo.puppet-demo-net (172.23.0.2): icmp_seq=2 ttl=64 time=0.153 ms
+64 bytes from puppet-server-demo.puppet-demo-net (172.23.0.2): icmp_seq=3 ttl=64 time=0.272 ms
+64 bytes from puppet-server-demo.puppet-demo-net (172.23.0.2): icmp_seq=4 ttl=64 time=0.292 ms
+^C
+--- puppet-server-demo ping statistics ---
+4 packets transmitted, 4 received, 0% packet loss, time 3044ms
+rtt min/avg/max/mdev = 0.107/0.206/0.292/0.078 ms
+root@puppet-agent-demo:/#
+```
