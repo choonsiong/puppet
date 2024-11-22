@@ -74,4 +74,17 @@ PING puppet-server-demo (172.23.0.2) 56(84) bytes of data.
 4 packets transmitted, 4 received, 0% packet loss, time 3044ms
 rtt min/avg/max/mdev = 0.107/0.206/0.292/0.078 ms
 root@puppet-agent-demo:/#
+
+root@puppet-server-demo:/# 
+root@puppet-server-demo:/# ping puppet-agent-demo
+PING puppet-agent-demo (172.23.0.3) 56(84) bytes of data.
+64 bytes from puppet-agent-demo.puppet-demo-net (172.23.0.3): icmp_seq=1 ttl=64 time=0.062 ms
+64 bytes from puppet-agent-demo.puppet-demo-net (172.23.0.3): icmp_seq=2 ttl=64 time=0.271 ms
+64 bytes from puppet-agent-demo.puppet-demo-net (172.23.0.3): icmp_seq=3 ttl=64 time=0.115 ms
+64 bytes from puppet-agent-demo.puppet-demo-net (172.23.0.3): icmp_seq=4 ttl=64 time=0.384 ms
+^C
+--- puppet-agent-demo ping statistics ---
+4 packets transmitted, 4 received, 0% packet loss, time 3013ms
+rtt min/avg/max/mdev = 0.062/0.208/0.384/0.127 ms
+root@puppet-server-demo:/#
 ```
