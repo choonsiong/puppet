@@ -3,6 +3,89 @@
 - [Puppet Blog](https://www.puppet.com/blog)
 - [Puppet Docker Container](https://hub.docker.com/r/voxpupuli/container-puppetserver)
 
+# To try the puppet server code in this repository
+
+Copy everything under `puppet-server/data/ to `/etc/puppetlabs/code/`
+
+```
+root@puppet:~# cd /etc/puppetlabs/
+root@puppet:/etc/puppetlabs# 
+root@puppet:/etc/puppetlabs# tree code
+code
+|-- environments
+|   `-- production
+|       |-- manifests
+|       |   `-- site.pp
+|       `-- modules
+|           |-- apache
+|           |   |-- files
+|           |   |   `-- httpd_minimal.conf
+|           |   `-- manifests
+|           |       |-- init.pp
+|           |       |-- init2.pp
+|           |       `-- init3.pp
+|           |-- hostname
+|           |   |-- functions
+|           |   |   `-- environment.pp
+|           |   `-- manifests
+|           |       `-- init.pp
+|           |-- motd
+|           |   |-- files
+|           |   |   `-- motd.txt
+|           |   |-- manifests
+|           |   |   `-- init.pp
+|           |   `-- templates
+|           |       `-- motd.epp
+|           `-- sysadmins
+|               `-- manifests
+|                   `-- init.pp
+|-- manifest
+|   |-- bob.pp
+|   `-- sysadmins.pp
+`-- tmp
+    |-- array.pp
+    |-- array2.pp
+    |-- array3.pp
+    |-- case-statement.pp
+    |-- codeblocks.pp
+    |-- data_types.pp
+    |-- facts.pp
+    |-- facts2.pp
+    |-- file.pp
+    |-- file2.pp
+    |-- functions.pp
+    |-- hashes.pp
+    |-- if-else-blocks.pp
+    |-- mysql.pp
+    |-- namevar.pp
+    |-- puppet-function.pp
+    |-- puppet-template.epp
+    |-- puppet-template2.epp
+    |-- puppet-template3.pp
+    |-- relationships.pp
+    |-- relationships2.pp
+    |-- relationships3.pp
+    |-- relationships4.pp
+    |-- resource-chaining.pp
+    |-- resource-chaining2.pp
+    |-- resource-declaration.pp
+    |-- resource-declaration2-before.pp
+    |-- resource-declaration2.pp
+    |-- scope.pp
+    |-- scope2.pp
+    |-- selectors.pp
+    |-- string-interpolation.pp
+    |-- test.pp
+    |-- triggering-event.pp
+    |-- triggering-event2.pp
+    |-- triggering-event3.pp
+    |-- variable.pp
+    `-- variable2.pp
+
+18 directories, 51 files
+root@puppet:/etc/puppetlabs#
+```
+
 # Running Puppet container
 
 Create a puppet network:
