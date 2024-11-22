@@ -339,6 +339,6 @@ root@puppet-agent-demo:/etc/puppetlabs/puppet/ssl#
 root@puppet-agent-demo:/etc/puppetlabs/puppet/ssl# 
 ```
 
-The reason we need to fix the `/etc/hosts` file above is because we are using the name 'puppet-server-demo' instead of 'puppet' for the puppet server node, so if you start the puppet server container with below command (the command below make use of the environment variable `DOCKER_PUPPET_SERVER_DATA` which you define your own in your shell startup file), then you can skip the `/etc/hosts` part.
+The reason we need to fix the `/etc/hosts` file above is because we are using the name 'puppet-server-demo' instead of 'puppet' for the puppet server node, so if you start the puppet server container with below command (the command below make use of the environment variable `DOCKER_PUPPET_SERVER_DATA` which you can define your own in your shell startup file), then you can skip the `/etc/hosts` part.
 
 `docker run -d --name puppet-server --network-alias puppet  --hostname puppet --network my_puppet_net -v "$DOCKER_PUPPET_SERVER_DATA:/etc/puppetlabs/code" ghcr.io/voxpupuli/puppetserver:8.6.1-latest `
