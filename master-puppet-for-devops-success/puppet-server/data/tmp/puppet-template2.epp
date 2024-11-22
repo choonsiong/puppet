@@ -1,11 +1,13 @@
-<% | Array $name_servers, Optional[String] $search | %> # $search either be a string or undefined
+<% | Array $name_servers, Optional[String] $search | -%> # $search either be a string or undefined
 
-<% $name_servers.each |$ns| { %>
+<% $name_servers.each |$ns| { -%>
 nameserver <%= $ns %>
-<% } %>
-<% if $search { %>
+<% } -%>
+<% if $search { -%>
 search <%= $search %>
-<% } %>
+<% } -%>
+
+# The -%> is used to not render the blank line
 
 # To render above template
 $name_servers = ['192.168.1.1', '192.168.1.2', '192.168.1.3']
