@@ -160,4 +160,10 @@ Info: Applying configuration version '1732263119'
 Info: Creating state file /opt/puppetlabs/puppet/cache/state/state.yaml
 Notice: Applied catalog in 0.00 seconds
 root@puppet-agent-demo:/etc/puppetlabs/puppet# 
+
+root@puppet-server-demo:/# puppetserver ca list --all
+Signed Certificates:
+    puppet-agent-demo        (SHA256)  CE:D2:85:55:D6:44:E9:B6:82:A5:11:D3:5C:C2:AA:C3:6B:80:0F:0C:05:05:C7:A8:53:57:D5:CB:51:F4:59:05	alt names: ["DNS:puppet-agent-demo"]
+    puppet-server-demo       (SHA256)  A0:17:8E:28:B7:FA:42:04:F3:C9:6B:BE:24:F6:F5:B7:03:31:47:BA:F5:8D:1C:D5:E0:48:0E:20:69:5E:3E:10	alt names: ["DNS:puppet", "DNS:puppet-server-demo"]	authorization extensions: [pp_cli_auth: true]
+root@puppet-server-demo:/#
 ```
