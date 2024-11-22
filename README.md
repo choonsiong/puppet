@@ -88,3 +88,34 @@ PING puppet-agent-demo (172.23.0.3) 56(84) bytes of data.
 rtt min/avg/max/mdev = 0.062/0.208/0.384/0.127 ms
 root@puppet-server-demo:/#
 ```
+
+Update puppet server `/etc/hosts` file on both server and agent:
+
+```
+root@puppet-server-demo:/# cat /etc/hosts
+127.0.0.1	localhost
+::1	localhost ip6-localhost ip6-loopback
+fe00::0	ip6-localnet
+ff00::0	ip6-mcastprefix
+ff02::1	ip6-allnodes
+ff02::2	ip6-allrouters
+172.23.0.2	puppet-server-demo puppet
+root@puppet-server-demo:/#
+root@puppet-server-demo:/# puppetserver ca list --all
+Signed Certificates:
+    puppet-server-demo       (SHA256)  A0:17:8E:28:B7:FA:42:04:F3:C9:6B:BE:24:F6:F5:B7:03:31:47:BA:F5:8D:1C:D5:E0:48:0E:20:69:5E:3E:10	alt names: ["DNS:puppet", "DNS:puppet-server-demo"]	authorization extensions: [pp_cli_auth: true]
+root@puppet-server-demo:/# 
+
+
+root@puppet-agent-demo:/# cat /etc/hosts
+127.0.0.1	localhost
+::1	localhost ip6-localhost ip6-loopback
+fe00::0	ip6-localnet
+ff00::0	ip6-mcastprefix
+ff02::1	ip6-allnodes
+ff02::2	ip6-allrouters
+172.23.0.3	puppet-agent-demo
+172.23.0.2	puppet
+root@puppet-agent-demo:/# 
+root@puppet-agent-demo:/# 
+```
