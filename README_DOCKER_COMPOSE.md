@@ -1,6 +1,6 @@
 # Using docker compose
 
-You can also use the `docker-compose.yml` available to start up the puppet server and agent containers. In the docker compose file, we mount the directories `puppet-server-data` and `puppet-agent-data` on the host to the `/etc/puppetlabs/code` inside the container. Then follow the above steps to fix the SSL issue.
+You can also use the `docker-compose.yml` available to start up the puppet server and agent containers. In the docker compose file, we mount the directories `puppet-server-data` and `puppet-agent-data` on the host to the `/etc/puppetlabs/code` inside the container. Then follow the steps in `README_DOCKER_CONTAINER` to fix the SSL issue.
 
 To start the container using compose, run `docker compose up -d`
 
