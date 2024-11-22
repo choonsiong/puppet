@@ -5,7 +5,7 @@
 
 # To try the puppet server code in this repository
 
-Copy everything under `puppet-server/data/` to `/etc/puppetlabs/code/` in the puppet server node.
+Copy everything under `puppet-server/data/` to `/etc/puppetlabs/code/` in the puppet server node. Alternatively, you can clone the repository and mount the directory on the running container directly ;p
 
 ```
 root@puppet:~# cd /etc/puppetlabs/
