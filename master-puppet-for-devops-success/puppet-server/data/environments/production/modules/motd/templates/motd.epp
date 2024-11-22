@@ -1,0 +1,9 @@
+<% | String $os_name, 
+  String $os_major, 
+  String $os_arch,
+  String $server_name | -%>
+
+Welcome to Puppet!
+
+You are logged into <%= $server_name %>, running <%= "${os_name} ${os_major} on ${os_arch}" %>.
+
