@@ -1,0 +1,14 @@
+version: '3.1'
+
+services:
+  puppetserver:
+    image: ghcr.io/voxpupuli/puppetserver:8.6.1-latest
+    hostname: puppet
+    volumes:
+      - ./puppet-server-data:/etc/puppetlabs/code
+  
+  puppetagent:
+    image: ghcr.io/voxpupuli/puppetserver:8.6.1-latest
+    hostname: puppet-agent
+    volumes:
+      - ./puppet-agent-data:/etc/puppetlabs/code
