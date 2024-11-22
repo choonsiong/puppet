@@ -345,3 +345,20 @@ The reason we need to fix the `/etc/hosts` file above is because we are using th
 
 # Using docker compose to start puppet server and puppet agent containers
 
+```
+$ ls
+docker-compose.yml  puppet-agent-data/  puppet-server-data/
+$
+$
+$ docker compose up -d
+[+] Running 3/3
+ ✔ Network puppet-server-agent-compose_default           Created                                                                                                                                                                              0.0s 
+ ✔ Container puppet-server-agent-compose-puppetagent-1   Started                                                                                                                                                                              0.2s 
+ ✔ Container puppet-server-agent-compose-puppetserver-1  Started                                                                                                                                                                              0.2s 
+$
+$ docker ps
+CONTAINER ID   IMAGE                                         COMMAND                  CREATED         STATUS                            PORTS      NAMES
+d1a51e0f7a97   ghcr.io/voxpupuli/puppetserver:8.6.1-latest   "dumb-init /docker-e…"   3 seconds ago   Up 2 seconds (health: starting)   8140/tcp   puppet-server-agent-compose-puppetserver-1
+b33a75482950   ghcr.io/voxpupuli/puppetserver:8.6.1-latest   "dumb-init /docker-e…"   3 seconds ago   Up 2 seconds (health: starting)   8140/tcp   puppet-server-agent-compose-puppetagent-1
+$
+```
