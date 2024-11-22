@@ -238,8 +238,6 @@ ff02::1	ip6-allnodes
 ff02::2	ip6-allrouters
 172.23.0.3	puppet-agent-demo
 root@puppet-agent-demo:/etc/puppetlabs/puppet/ssl# vi /etc/hosts
-root@puppet-agent-demo:/etc/puppetlabs/puppet/ssl# puppet agent -t 172.23
-Error: Could not prepare for execution: The puppet agent command does not take parameters
 root@puppet-agent-demo:/etc/puppetlabs/puppet/ssl# puppet agent -t       
 Info: Refreshed CRL: 7E:57:AA:0D:63:E8:FC:EC:D3:CF:6B:2D:DB:2D:4D:3E:B9:22:47:77:0D:23:7F:58:32:09:3D:DF:F3:5A:16:12
 Info: csr_attributes file loading from /etc/puppetlabs/puppet/csr_attributes.yaml
@@ -257,3 +255,7 @@ Notice: Applied catalog in 0.00 seconds
 root@puppet-agent-demo:/etc/puppetlabs/puppet/ssl# 
 root@puppet-agent-demo:/etc/puppetlabs/puppet/ssl# 
 ```
+
+The reason we need to fix the `/etc/hosts` file above is because we are using the name 'puppet-server-demo' instead of 'puppet' for the puppet server node, so if you start the puppet server container with below command, then you can skip the `/etc/hosts` part.
+
+`docker run -d --name puppet-server --network-alias puppet  --hostname puppet --network my_puppet_net -v "$DOCKER_PUPPET_SERVER_DATA:/etc/puppetlabs/code" ghcr.io/voxpupuli/puppetserver:8.6.1-latest `
