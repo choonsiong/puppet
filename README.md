@@ -119,3 +119,45 @@ ff02::2	ip6-allrouters
 root@puppet-agent-demo:/# 
 root@puppet-agent-demo:/# 
 ```
+
+Running `puppet agent -t` for the first time on agent node (you will get error, and remove the ssl folder in the agent node):
+
+```
+root@puppet-agent-demo:/# puppet agent -t
+Info: Using environment 'production'
+Error: certificate verify failed [unable to get local issuer certificate for CN=puppet-server-demo]
+Error: Could not retrieve catalog from remote server: certificate verify failed [unable to get local issuer certificate for CN=puppet-server-demo]
+Warning: Not using cache on failed catalog
+Error: Could not retrieve catalog; skipping run
+Error: Could not send report: certificate verify failed [unable to get local issuer certificate for CN=puppet-server-demo]
+root@puppet-agent-demo:/# 
+root@puppet-agent-demo:/# 
+root@puppet-agent-demo:/# cd /etc/puppetlabs/puppet     
+root@puppet-agent-demo:/etc/puppetlabs/puppet# ls
+csr_attributes.yaml  devices  hiera.yaml  puppet.conf  puppetdb.conf  ssl
+root@puppet-agent-demo:/etc/puppetlabs/puppet# 
+root@puppet-agent-demo:/etc/puppetlabs/puppet# rm -rf ssl
+root@puppet-agent-demo:/etc/puppetlabs/puppet# 
+root@puppet-agent-demo:/etc/puppetlabs/puppet# 
+root@puppet-agent-demo:/etc/puppetlabs/puppet# ls
+csr_attributes.yaml  devices  hiera.yaml  puppet.conf  puppetdb.conf
+root@puppet-agent-demo:/etc/puppetlabs/puppet# 
+root@puppet-agent-demo:/etc/puppetlabs/puppet# 
+root@puppet-agent-demo:/etc/puppetlabs/puppet# puppet agent -t
+Info: Refreshed CRL: 7E:57:AA:0D:63:E8:FC:EC:D3:CF:6B:2D:DB:2D:4D:3E:B9:22:47:77:0D:23:7F:58:32:09:3D:DF:F3:5A:16:12
+Info: Creating a new RSA SSL key for puppet-agent-demo
+Info: csr_attributes file loading from /etc/puppetlabs/puppet/csr_attributes.yaml
+Info: Creating a new SSL certificate request for puppet-agent-demo
+Info: Certificate Request fingerprint (SHA256): 93:FE:0E:A4:7C:5E:31:BA:78:62:68:AE:71:7B:8E:34:87:F0:88:69:E4:05:78:12:F1:AC:AF:B7:6C:C1:F1:CF
+Info: Downloaded certificate for puppet-agent-demo from https://puppet:8140/puppet-ca/v1
+Info: Using environment 'production'
+Info: Retrieving pluginfacts
+Info: Retrieving plugin
+Notice: Requesting catalog from puppet:8140 (172.23.0.2)
+Notice: Catalog compiled by puppet-server-demo
+Info: Caching catalog for puppet-agent-demo
+Info: Applying configuration version '1732263119'
+Info: Creating state file /opt/puppetlabs/puppet/cache/state/state.yaml
+Notice: Applied catalog in 0.00 seconds
+root@puppet-agent-demo:/etc/puppetlabs/puppet# 
+```
