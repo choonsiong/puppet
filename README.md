@@ -167,3 +167,93 @@ Signed Certificates:
     puppet-server-demo       (SHA256)  A0:17:8E:28:B7:FA:42:04:F3:C9:6B:BE:24:F6:F5:B7:03:31:47:BA:F5:8D:1C:D5:E0:48:0E:20:69:5E:3E:10	alt names: ["DNS:puppet", "DNS:puppet-server-demo"]	authorization extensions: [pp_cli_auth: true]
 root@puppet-server-demo:/#
 ```
+
+Now puppet server and puppet agent nodes are available to use, but kindly note that everytime you stop the agent node container, you will need to clean up the SSL folder again in order for the agent to work properly (in below case, we also need to fix the `/etc/hosts` file):
+
+```
+root@puppet-agent-demo:/etc/puppetlabs/puppet# 
+root@puppet-agent-demo:/etc/puppetlabs/puppet# puppet agent -t
+Info: Using environment 'production'
+Info: Retrieving pluginfacts
+Info: Retrieving plugin
+Notice: Requesting catalog from puppet:8140 (172.23.0.2)
+Notice: Catalog compiled by puppet-server-demo
+Info: Caching catalog for puppet-agent-demo
+Info: Applying configuration version '1732263119'
+Notice: Applied catalog in 0.01 seconds
+root@puppet-agent-demo:/etc/puppetlabs/puppet# 
+root@puppet-agent-demo:/etc/puppetlabs/puppet# 
+root@puppet-agent-demo:/etc/puppetlabs/puppet# exit
+exit
+
+What's next:
+    Try Docker Debug for seamless, persistent debugging tools in any container or image → docker debug puppet-agent-demo
+    Learn more at https://docs.docker.com/go/debug-cli/
+$ docker stop puppet-agent-demo
+puppet-agent-demo
+$
+
+$ docker start puppet-agent-demo
+puppet-agent-demo
+$ docker exec -it puppet-agent-demo bash
+root@puppet-agent-demo:/# 
+root@puppet-agent-demo:/# puppet agent -t
+Error: The CRL issued by 'CN=Puppet CA generated on puppet-server-demo at 2024-11-22 07:58:03 \+0000' is missing
+Error: The CRL issued by 'CN=Puppet CA generated on puppet-server-demo at 2024-11-22 07:58:03 \+0000' is missing
+root@puppet-agent-demo:/# 
+root@puppet-agent-demo:/# 
+root@puppet-agent-demo:/# cd /etc/puppetlabs/puppet/ssl/
+root@puppet-agent-demo:/etc/puppetlabs/puppet/ssl# 
+root@puppet-agent-demo:/etc/puppetlabs/puppet/ssl# ls
+certificate_requests  certs  crl.pem  private  private_keys  public_keys
+root@puppet-agent-demo:/etc/puppetlabs/puppet/ssl# ls -l
+total 24
+drwxr-xr-x 2 puppet puppet 4096 Nov 22 08:11 certificate_requests
+drwxr-xr-x 2 puppet puppet 4096 Nov 22 08:11 certs
+-rw-r--r-- 1 puppet puppet 1994 Nov 22 08:15 crl.pem
+drwxr-x--- 2 puppet puppet 4096 Nov 22 08:11 private
+drwxr-x--- 2 puppet puppet 4096 Nov 22 08:11 private_keys
+drwxr-xr-x 2 puppet puppet 4096 Nov 22 08:11 public_keys
+root@puppet-agent-demo:/etc/puppetlabs/puppet/ssl# 
+root@puppet-agent-demo:/etc/puppetlabs/puppet/ssl# rm -rf certificate_requests/ certs/ crl.pem private
+root@puppet-agent-demo:/etc/puppetlabs/puppet/ssl# 
+root@puppet-agent-demo:/etc/puppetlabs/puppet/ssl# 
+root@puppet-agent-demo:/etc/puppetlabs/puppet/ssl# ls
+private_keys  public_keys
+root@puppet-agent-demo:/etc/puppetlabs/puppet/ssl# 
+root@puppet-agent-demo:/etc/puppetlabs/puppet/ssl# 
+root@puppet-agent-demo:/etc/puppetlabs/puppet/ssl# 
+root@puppet-agent-demo:/etc/puppetlabs/puppet/ssl# puppet agent -t
+Error: Connection to https://puppet:8140/puppet-ca/v1 failed, trying next route: Request to https://puppet:8140/puppet-ca/v1 failed after 0.005 seconds: Failed to open TCP connection to puppet:8140 (getaddrinfo: Name or service not known)
+Wrapped exception:
+Failed to open TCP connection to puppet:8140 (getaddrinfo: Name or service not known)
+Error: No more routes to ca
+Error: No more routes to ca
+root@puppet-agent-demo:/etc/puppetlabs/puppet/ssl# cat /etc/hosts
+127.0.0.1	localhost
+::1	localhost ip6-localhost ip6-loopback
+fe00::0	ip6-localnet
+ff00::0	ip6-mcastprefix
+ff02::1	ip6-allnodes
+ff02::2	ip6-allrouters
+172.23.0.3	puppet-agent-demo
+root@puppet-agent-demo:/etc/puppetlabs/puppet/ssl# vi /etc/hosts
+root@puppet-agent-demo:/etc/puppetlabs/puppet/ssl# puppet agent -t 172.23
+Error: Could not prepare for execution: The puppet agent command does not take parameters
+root@puppet-agent-demo:/etc/puppetlabs/puppet/ssl# puppet agent -t       
+Info: Refreshed CRL: 7E:57:AA:0D:63:E8:FC:EC:D3:CF:6B:2D:DB:2D:4D:3E:B9:22:47:77:0D:23:7F:58:32:09:3D:DF:F3:5A:16:12
+Info: csr_attributes file loading from /etc/puppetlabs/puppet/csr_attributes.yaml
+Info: Creating a new SSL certificate request for puppet-agent-demo
+Info: Certificate Request fingerprint (SHA256): 93:FE:0E:A4:7C:5E:31:BA:78:62:68:AE:71:7B:8E:34:87:F0:88:69:E4:05:78:12:F1:AC:AF:B7:6C:C1:F1:CF
+Info: Downloaded certificate for puppet-agent-demo from https://puppet:8140/puppet-ca/v1
+Info: Using environment 'production'
+Info: Retrieving pluginfacts
+Info: Retrieving plugin
+Notice: Requesting catalog from puppet:8140 (172.23.0.2)
+Notice: Catalog compiled by puppet-server-demo
+Info: Caching catalog for puppet-agent-demo
+Info: Applying configuration version '1732263119'
+Notice: Applied catalog in 0.00 seconds
+root@puppet-agent-demo:/etc/puppetlabs/puppet/ssl# 
+root@puppet-agent-demo:/etc/puppetlabs/puppet/ssl# 
+```
