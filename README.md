@@ -26,7 +26,7 @@ b3de88bf6363   openldap-net                bridge    local
 $
 ```
 
-Start the puppet server container
+Start the puppet server container:
 
 ```
 $ docker run -d --name puppet-server-demo --network-alias puppet-server-demo  --hostname puppet-server-demo --network puppet-demo-net -v "/tmp/puppet-server-code:/etc/puppetlabs/code" ghcr.io/voxpupuli/puppetserver:8.6.1-latest
