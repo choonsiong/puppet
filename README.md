@@ -343,7 +343,9 @@ The reason we need to fix the `/etc/hosts` file above is because we are using th
 
 `docker run -d --name puppet-server --network-alias puppet  --hostname puppet --network my_puppet_net -v "$DOCKER_PUPPET_SERVER_DATA:/etc/puppetlabs/code" ghcr.io/voxpupuli/puppetserver:8.6.1-latest `
 
-# Using docker compose to start puppet server and puppet agent containers
+# Using docker compose
+
+You can also use the `docker-compose.yml` available to start up the puppet server and agent containers.
 
 ```
 $ ls
