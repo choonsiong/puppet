@@ -25,3 +25,24 @@ b3de88bf6363   openldap-net                bridge    local
 09d0c94f5368   test-net                    bridge    local
 $
 ```
+
+Start the puppet server container
+
+```
+$ docker run -d --name puppet-server-demo --network-alias puppet-server-demo  --hostname puppet-server-demo --network puppet-demo-net -v "/tmp/puppet-server-code:/etc/puppetlabs/code" ghcr.io/voxpupuli/puppetserver:8.6.1-latest
+d1ee65737082f87e4d461f5fe4af6cf10e2a369fb36fc3a3304177a1d58470ae
+$
+$ docker exec -it puppet-server-demo bash
+root@puppet-server-demo:/# 
+root@puppet-server-demo:/# puppet --version
+8.8.1
+root@puppet-server-demo:/# 
+root@puppet-server-demo:/# 
+root@puppet-server-demo:/# 
+root@puppet-server-demo:/# exit
+exit
+
+What's next:
+    Try Docker Debug for seamless, persistent debugging tools in any container or image → docker debug puppet-server-demo
+    Learn more at https://docs.docker.com/go/debug-cli/
+```
