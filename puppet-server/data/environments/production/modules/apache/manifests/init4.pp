@@ -1,5 +1,5 @@
 class apache (
-  String $docroot,
+  String $docroot = '/var/www/html',
   Integer $port = 80,
 ) {
   case $::facts['os']['family'] {
