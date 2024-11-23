@@ -14,7 +14,7 @@ class apache {
   }
 
   file { '/etc/httpd/conf/httpd.conf':
-    ensure => file,
-    content => epp('apache/httpd.conf.epp', $params)
+    ensure  => file,
+    content => epp('apache/httpd.conf.epp', $params),
   }
 }
