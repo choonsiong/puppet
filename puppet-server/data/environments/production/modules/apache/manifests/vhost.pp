@@ -17,7 +17,7 @@ define apache::vhost (
   # Resource 2
   file { $docroot:
     ensure => directory,
-    owner => 'root',
-    group => 'root',
+    owner  => 'root',
+    group  => 'root',
   }
 }
