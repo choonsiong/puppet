@@ -20,9 +20,9 @@ node 'agentdemo' {
     docroot => '/var/www/acme.com',
   }
 
-  # we can use defined source multipe times (class cannot!)
+  # we can instantiate defined source multipe times (but class cannot!)
   apache::vhost { 'example.com':
-    port    => 8082,
+    port    => 8081,
     docroot => '/var/www/example.com',
   }
 }
