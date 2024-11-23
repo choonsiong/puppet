@@ -13,4 +13,16 @@ node 'agentdemo' {
     port    => 8080,
     docroot => '/tmp',
   }
+
+  # using defined resource
+  apache::vhost { 'acme.com':
+    port    => 8081,
+    docroot => '/var/www/acme.com',
+  }
+
+  # we can use defined source multipe times (class cannot!)
+  apache::vhost { 'example.com':
+    port    => 8082,
+    docroot => '/var/www/example.com',
+  }
 }

@@ -1,0 +1,6 @@
+<% | Variant[String, Integer] $port, String $docroot, String $server_name | %>
+
+<VirtualHost *:<%= $port %>>
+  ServerName <%= $server_name %>
+  DocumentRoot <%= $docroot %>
+</VirtualHost>
