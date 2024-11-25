@@ -1,13 +1,10 @@
-# Using resource defaults
-
-File { # referencing all file resource in current scope (including those includes)
-  ensure => file,
-  owner => 'root',
-  group => 'root',
-  mode => '0644',
-}
-
 file {
+  default: # resource defaults apply only to this resource group only, so won't affect 'include classes'
+    ensure => file,
+    owner  => 'root',
+    group  => 'root',
+    mode   => '0644';
+
   '/tmp/foo':
     source => 'puppet:///modules/mymodule/foo';
   '/tmp/bar':
