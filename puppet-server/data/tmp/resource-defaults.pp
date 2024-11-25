@@ -1,4 +1,5 @@
 # Using resource defaults
+
 File { # referencing all file resource in this file
   ensure => file,
   owner => 'root',
