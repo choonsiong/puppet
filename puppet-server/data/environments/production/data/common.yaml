@@ -1,0 +1,6 @@
+greeting: Hello and welcome to Hiera
+
+motd::content: |
+  Welcome
+  
+  This server is managed by foobar@example.com

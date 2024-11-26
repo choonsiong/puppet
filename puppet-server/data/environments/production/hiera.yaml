@@ -8,4 +8,5 @@ defaults:
 # An array
 hierarchy:
   - name: "Global Configuration"
-    paths: "common.yaml"
+    paths:
+    - "common.yaml"
